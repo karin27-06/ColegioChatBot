@@ -105,7 +105,7 @@ const menuOpen = ref<boolean>(false);
 const isDark = ref<boolean>(false);
 
 // Computed para alternar el logo
-const logoSrc = computed(() => (isDark.value ? "/imagenes/logoB.png" : "/imagenes/logo.png"));
+const logoSrc = computed(() => (isDark.value ? "/imagenes/logoB.jpg" : "/imagenes/logo.jpg"));
 
 onMounted(() => {
   const html = document.documentElement;
