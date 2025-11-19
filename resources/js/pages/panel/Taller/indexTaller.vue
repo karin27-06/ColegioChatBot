@@ -1,5 +1,5 @@
 <template>
-    <Head title="Espacios de Trabajo" />
+    <Head title="Talleres" />
     <AppLayout>
         <div>
             <template v-if="isLoading">
@@ -8,8 +8,8 @@
 
             <template v-else>
                 <div class="card">
-                    <AddEspacio @espacio-agregada="refrescarListado"/>
-                    <ListEspacio :refresh="refreshKey"/>
+                    <AddTaller @taller-agregado="refrescarListado"/>
+                    <ListTaller :refresh="refreshKey"/>
                 </div>
             </template>
         </div>
@@ -21,8 +21,8 @@ import { ref, onMounted } from 'vue';
 import AppLayout from '@/layout/AppLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import Espera from '@/components/Espera.vue';
-import AddEspacio from './Desarrollo/AddEspacio.vue';
-import ListEspacio from './Desarrollo/ListEspacio.vue';
+import AddTaller from './Desarrollo/AddTaller.vue';
+import ListTaller from './Desarrollo/ListTaller.vue';
 
 const isLoading = ref(true);
 const refreshKey = ref(0);

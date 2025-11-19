@@ -6,9 +6,9 @@ import Button from 'primevue/button';
 import { useToast } from 'primevue/usetoast';
 
 // Interfaces
-interface Espacio {
+interface Taller {
     id: number;
-    name?: string;
+    nombre?: string;
     description?: string;
     state?: boolean;
 }
@@ -16,7 +16,7 @@ interface Espacio {
 // Props y Emit
 const props = defineProps<{
   visible: boolean;
-  espacio: Espacio | null;
+  taller: Taller | null;
 }>();
 
 const emit = defineEmits<{
@@ -40,22 +40,22 @@ function closeDialog() {
     emit('update:visible', false);
 }
 
-async function deleteEspacio() {
-    if (!props.espacio) return;
+async function deleteTaller() {
+    if (!props.taller) return;
 
     try {
-        await axios.delete(`/espacio/${props.espacio.id}`);
+        await axios.delete(`/taller/${props.taller.id}`);
         emit('deleted');
         closeDialog();
         toast.add({
             severity: 'success',
             summary: 'Éxito',
-            detail: 'Espacio eliminado correctamente',
+            detail: 'Taller eliminado correctamente',
             life: 3000
         });
     } catch (error) {
         console.error(error);
-        let errorMessage = 'Error eliminando el espacio';
+        let errorMessage = 'Error eliminando el taller';
         const axiosError = error as AxiosError<any>;
         if (axiosError.response) {
             errorMessage = axiosError.response.data.message || errorMessage;
@@ -75,14 +75,14 @@ async function deleteEspacio() {
 >
     <div class="flex items-center gap-4">
         <i class="pi pi-exclamation-triangle !text-3xl" />
-        <span v-if="props.espacio">
-            ¿Estás seguro de eliminar el espacio de trabajo llamado: 
-            <b>{{ props.espacio.name }}</b>?
+        <span v-if="props.taller">
+            ¿Estás seguro de eliminar el taller llamado: 
+            <b>{{ props.taller.nombre }}</b>?
         </span>
     </div>
     <template #footer>
         <Button label="No" icon="pi pi-times" text @click="closeDialog" />
-        <Button label="Sí" icon="pi pi-check" @click="deleteEspacio" />
+        <Button label="Sí" icon="pi pi-check" @click="deleteTaller" />
     </template>
 </Dialog>
 </template>

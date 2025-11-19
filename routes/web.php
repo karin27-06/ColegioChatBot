@@ -13,7 +13,7 @@ use App\Http\Controllers\Api\EmployeeTypeController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\MovementController;
 use App\Http\Controllers\Api\ScheduleController;
-use App\Http\Controllers\Api\SpaceController;
+use App\Http\Controllers\Api\TallerController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Reportes\AlertPDFController;
 use App\Http\Controllers\Reportes\ConfigAlertPDFController;
@@ -27,6 +27,7 @@ use App\Http\Controllers\Web\EmployeeWebController;
 use App\Http\Controllers\Web\MovementWebController;
 use App\Http\Controllers\Web\ScheduleWebController;
 use App\Http\Controllers\Web\SpaceWebController;
+use App\Http\Controllers\Web\TallerWebController;
 use App\Http\Controllers\Web\UsuarioWebController;
 
 use Illuminate\Support\Facades\Route;
@@ -48,7 +49,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     #VISTAS DEL FRONTEND
     Route::get('/horarios', [ScheduleWebController::class, 'index'])->name('index.view');
-    Route::get('/espacios', [SpaceWebController::class, 'index'])->name('index.view');
+    Route::get('/talleres', [TallerWebController::class, 'index'])->name('index.view');
     Route::get('/empleados', [EmployeeWebController::class, 'index'])->name('index.view');
     Route::get('/movimientos', [MovementWebController::class, 'index'])->name('index.view');
     Route::get('/alertas', [AlertWebController::class, 'index'])->name('index.view');
@@ -62,13 +63,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/consulta/{dni}', [ConsultasDni::class, 'consultar'])->name('consultar.dni');
     Route::get('/user-id', [ConsultasId::class, 'getUserId'])->middleware('auth:api');
 
-    // ESPACIO -> BACKEND
-    Route::prefix('espacio')->group(function () {
-        Route::get('/', [SpaceController::class, 'index'])->name('espacio.index');
-        Route::post('/', [SpaceController::class, 'store'])->name('espacios.store');
-        Route::get('/{space}', [SpaceController::class, 'show'])->name('espacios.show');
-        Route::put('/{space}', [SpaceController::class, 'update'])->name('espacios.update');
-        Route::delete('/{space}', [SpaceController::class, 'destroy'])->name('espacios.destroy');
+    // TALLER -> BACKEND
+    Route::prefix('taller')->group(function () {
+        Route::get('/', [TallerController::class, 'index'])->name('taller.index');
+        Route::post('/', [TallerController::class, 'store'])->name('talleres.store');
+        Route::get('/{taller}', [TallerController::class, 'show'])->name('talleres.show');
+        Route::put('/{taller}', [TallerController::class, 'update'])->name('talleres.update');
+        Route::delete('/{taller}', [TallerController::class, 'destroy'])->name('talleres.destroy');
     });
 
     #HORARIO => BACKEND
@@ -147,7 +148,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('panel/reports')->group(function () {
 
         #EXPORTACION Y IMPORTACION ESPACIOS
-        Route::get('/export-excel-spaces', [SpaceController::class, 'exportExcel'])->name('export-excel-spaces');
+        Route::get('/export-excel-spaces', [TallerController::class, 'exportExcel'])->name('export-excel-spaces');
         Route::get('/export-pdf-spaces', [SpacePDFController::class, 'exportPDF'])->name('export-pdf-spaces');
         // Ruta para importar desde Excel
         //Route::post('/import-excel-spaces', [SpaceController::class, 'importExcel'])->name('import-excel-spaces');
