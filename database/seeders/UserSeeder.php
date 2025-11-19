@@ -41,8 +41,20 @@ class UserSeeder extends Seeder{
             'status' => true,
             'restablecimiento' => 0,
         ]);
+ $admin_3 = User::create([
+            'name' => 'Musse Aaron',
+            'dni' => '72681442',
+            'apellidos' => 'Milla',
+            'nacimiento' => '2003-03-11',
+            'email' => 'aamussem@ucvvirtual.com',
+            'username' => 'Aamussem',
+            'password' => Hash::make('12345678'),
+            'status' => true,
+            'restablecimiento' => 0,
+        ]);
 
         $admin_1->assignRole($adminRole);
         $admin_2->assignRole($adminRole);
+        $admin_3->assignRole($adminRole);
     }
 }
