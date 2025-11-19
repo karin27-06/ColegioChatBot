@@ -5,7 +5,7 @@
       <a href="#inicio" class="flex items-center space-x-2">
         <img :src="logoSrc" alt="Logo" class="h-10 w-10 cursor-pointer transition-all duration-300" />
         <span class="text-lg font-bold text-blue-700 dark:text-cyan-400 cursor-pointer">
-          Sistema Biométrico y Dactilar
+          Sistema de Gestion e Inscripcion.
         </span>
       </a>
 

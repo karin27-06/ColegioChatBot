@@ -12,12 +12,12 @@
         <h1 class="text-4xl md:text-6xl font-bold text-blue-700 dark:text-cyan-400 mb-4 transition-colors duration-500">
           Sistema de <br />
           <span class="text-blue-900 dark:text-cyan-200">
-            Reconocimiento Facial y Dactilar para la Gestión Eficiente de Espacios de trabajo
+            Gestion e inscripcion de talleres con asistente virtual en la I.E.INIF 48.
           </span>
         </h1>
         <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 transition-colors duration-500">
-          Una solución inteligente para la identificación segura, rápida y confiable.
-          Ideal para empresas, instituciones y sistemas de control de acceso modernos.
+          Una solución inteligente para la gestion e inscripcion segura, rápida y confiable de talleres.
+          Ideal para empresas, instituciones y sistemas de gestion, monitoreo y control de acceso modernos.
         </p>
 
         <div class="flex space-x-4">
