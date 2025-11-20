@@ -11,7 +11,7 @@
         Contáctanos
       </h2>
       <p class="mx-auto mt-4 max-w-2xl text-lg text-neutral-600 dark:text-gray-300">
-        ¿Tienes dudas sobre el sistema de reconocimiento facial y dactilar? 
+        ¿Tienes dudas sobre el sistema de Gestion e inscripciones de alumnas?<br />
         Escríbenos y nuestro equipo técnico te brindará asistencia personalizada.
       </p>
     </div>
@@ -140,11 +140,12 @@ import {
 } from '@/components/ui/dialog'
 
 const contactos = [
-  { title: 'Oficina principal', icon: MapPin, info: 'Av. Los Innovadores 120, Sullana, Piura, Perú' },
-  { title: 'Soporte técnico', icon: Phone, info: `<a href="tel:+51912345678">+51 912 345 678</a>` },
-  { title: 'Correo institucional', icon: Mail, info: `<a href="mailto:soporte@biometria.pe">soporte@biometria.pe</a>` },
-  { title: 'Área de desarrollo', icon: Cpu, info: 'Equipo especializado en reconocimiento facial y dactilar.' },
+  { title: 'Oficina principal', icon: MapPin, info: 'Av. José de Lama N° 2302 - Urbanización Santa Rosa - Piura-Sullana' },
+  { title: 'Soporte técnico', icon: Phone, info: `<a href="https://wa.me/51930992236" target="_blank">+51 930 992 236</a> - <a href="https://wa.me/51957684541" target="_blank">+51 957 684 541</a>` },
+  { title: 'Correo institucional', icon: Mail, info: `<a href="mailto:aamussem@ucvvirtual.edu.pe">aamussem@ucvvirtual.edu.pe</a> - <a href="mailto:aaronleandro.musemilla2017@gmail.com">aaronleandro.musemilla2017@gmail.com</a>` },
+  { title: 'Área de desarrollo', icon: Cpu, info: 'Equipo especializado en recoleccion de datos, gestion de talleres y eficacia tecnologica.' },
 ]
+
 
 const mensaje = reactive({
   text: '',

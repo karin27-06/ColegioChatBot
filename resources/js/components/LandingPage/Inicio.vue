@@ -78,11 +78,14 @@
 import { ref, onMounted, onUnmounted } from "vue";
 
 const images = [
-  "/imagenes/biometrico5.jpg",
-  "/imagenes/biometrico6.jpg",
-  "/imagenes/biometrico2.png",
-  "/imagenes/biometrico3.png",
-  "/imagenes/biometrico4.png",
+
+  "/imagenes/taller2.jpg",
+  "/imagenes/taller3.jpg",
+  "/imagenes/taller4.jpg",
+  "/imagenes/taller5.jpg",
+  "/imagenes/taller6.jpg",
+  "/imagenes/taller7.jpg",
+  "/imagenes/taller 8.jpg",
 ];
 
 const currentIndex = ref(0);

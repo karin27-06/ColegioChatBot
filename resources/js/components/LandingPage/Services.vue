@@ -4,7 +4,7 @@
     class="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-gray-900 px-6 py-16"
   >
     <h2 class="text-3xl font-bold text-blue-700 dark:text-cyan-400 mb-10 text-center">
-      Funcionalidades del Sistema
+      Funcionalidades del Sistema de Gestión e Inscripciones INIF 48.
     </h2>
 
     <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full">
@@ -21,14 +21,14 @@
 </template>
 
 <script setup lang="ts">
-import { Fingerprint, Camera, Shield, Clock, UserCheck, Database } from "lucide-vue-next";
+import { Bot, BookOpen, Shield, Settings, UserCheck, Database } from "lucide-vue-next";
 
 const servicios = [
-  { titulo: "Reconocimiento Facial", descripcion: "Identificación mediante análisis de rasgos faciales en tiempo real.", icon: Camera },
-  { titulo: "Reconocimiento Dactilar", descripcion: "Lectura precisa y rápida de huellas dactilares con tecnología biométrica.", icon: Fingerprint },
-  { titulo: "Seguridad de Datos", descripcion: "Cifrado avanzado y almacenamiento seguro de información biométrica.", icon: Shield },
-  { titulo: "Registro Automático", descripcion: "Control de asistencia y accesos sin contacto físico.", icon: Clock },
-  { titulo: "Gestión de Usuarios", descripcion: "Panel administrativo para la gestión y verificación de identidades.", icon: UserCheck },
-  { titulo: "Base de Datos Inteligente", descripcion: "Sincronización con sistemas externos y almacenamiento eficiente.", icon: Database },
+  { titulo: "Asistente Virtual Inteligente", descripcion: "Atiende consultas, guía a los usuarios y realiza inscripciones de forma automática.", icon: Bot },
+  { titulo: "Gestión de Talleres y Cursos", descripcion: "Creación, edición y organización de talleres con control de cupos y horarios.", icon: BookOpen },
+  { titulo: "Inscripciones Automatizadas", descripcion: "Registro rápido de participantes, confirmaciones instantáneas y generación de comprobantes.", icon: Shield },
+  { titulo: "Control de Roles y reportes", descripcion: "Asignacion de roles y reportes automáticos para administradores e instructores.", icon: Settings },
+  { titulo: "Gestión de Usuarios", descripcion: "Panel administrativo para administrar participantes, instructores y roles.", icon: UserCheck },
+  { titulo: "Base de Datos Centralizada", descripcion: "Base de Datos Inteligente Sincronización con sistemas externos y almacenamiento eficiente.", icon: Database },
 ];
 </script>
