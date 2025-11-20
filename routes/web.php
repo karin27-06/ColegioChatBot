@@ -29,6 +29,7 @@ use App\Http\Controllers\Web\ScheduleWebController;
 use App\Http\Controllers\Web\SpaceWebController;
 use App\Http\Controllers\Web\TallerWebController;
 use App\Http\Controllers\Web\UsuarioWebController;
+use App\Http\Controllers\ContactController;
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -38,6 +39,9 @@ use PSpell\Config;
 Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('home');
+
+// Ruta pública para guardar mensajes de contacto via WhatsApp
+Route::post('/contacto-whatsapp', [ContactController::class, 'store']);
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -145,6 +149,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/{id}', [RolesController::class, 'update'])->name('rol.update');
         Route::delete('/{id}', [RolesController::class, 'destroy'])->name('rol.destroy');
     });
+
     Route::prefix('panel/reports')->group(function () {
 
         #EXPORTACION Y IMPORTACION ESPACIOS
@@ -190,13 +195,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         //Route::post('/import-excel-config_alerts', [AlertController::class, 'importExcel'])->name('import-excel-config_alerts');
     });
 });
-            //RUTAS PARA QUE PASEN EL TEST
-        Route::get('/register', [RegisteredUserController::class, 'create'])
-            ->middleware('guest')
-            ->name('register');
 
-        Route::post('/register', [RegisteredUserController::class, 'store'])
-            ->middleware('guest');
+//RUTAS PARA QUE PASEN EL TEST
+Route::get('/register', [RegisteredUserController::class, 'create'])
+    ->middleware('guest')
+    ->name('register');
+
+Route::post('/register', [RegisteredUserController::class, 'store'])
+    ->middleware('guest');
+
 // Archivos de configuración adicionales
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

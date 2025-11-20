@@ -44,30 +44,28 @@
     </div>
 
     <!-- Botón que abre el modal -->
-    <Dialog>
-      <DialogTrigger as-child>
-        <button 
-          class="mt-12 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 shadow">
-          Enviar mensaje
-        </button>
-      </DialogTrigger>
+    <button 
+      @click="mostrarModal = true"
+      class="mt-12 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 shadow">
+      Enviar mensaje
+    </button>
 
-      <DialogContent 
-        class="sm:max-w-3xl bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 
-               rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 p-6"
-      >
-        <DialogHeader>
-          <DialogTitle>Formulario de contacto</DialogTitle>
-          <DialogDescription>
-            Completa los campos y nuestro equipo te responderá a la brevedad.
-          </DialogDescription>
-        </DialogHeader>
+    <!-- Modal Simple -->
+    <div v-if="mostrarModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div class="bg-white dark:bg-gray-900 rounded-2xl p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Formulario de contacto</h3>
+          <button 
+            @click="mostrarModal = false"
+            class="text-gray-500 hover:text-gray-700 text-2xl"
+          >
+            &times;
+          </button>
+        </div>
 
         <!-- Formulario -->
-        <form 
-          @submit.prevent="enviarFormulario" 
-          class="grid gap-6 w-full mt-4"
-        >
+        <form @submit.prevent="enviarFormulario" class="grid gap-6">
           <div>
             <label class="block text-gray-700 dark:text-gray-200 font-medium mb-2">Nombre</label>
             <input 
@@ -88,17 +86,17 @@
             <input v-model="form.phone" type="text" maxlength="9" class="w-full rounded-lg border px-4 py-2" required placeholder="999999999" />
           </div>
 
-          <div class="sm:col-span-2">
+          <div>
             <label class="block text-gray-700 dark:text-gray-200 font-medium mb-2">Mensaje</label>
             <textarea v-model="form.subject" rows="4" class="w-full rounded-lg border px-4 py-2" required placeholder="Escríbenos tus consultas técnicas o solicitudes..."></textarea>
           </div>
 
-          <div class="flex justify-between sm:col-span-2 gap-4">
+          <div class="flex gap-4">
             <button type="button" @click="limpiarFormulario" 
-              class="w-1/2 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 px-6 py-2 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500">
+              class="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 px-6 py-2 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500">
               Borrar
             </button>
-            <button type="submit" class="w-1/2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+            <button type="submit" class="flex-1 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
               Enviar
             </button>
           </div>
@@ -106,38 +104,22 @@
           <!-- Mensaje -->
           <p v-if="mensaje.text" 
              :class="mensaje.tipo === 'success' 
-                      ? 'text-green-600 dark:text-green-400 mt-4 text-sm text-center sm:col-span-2' 
-                      : 'text-red-600 dark:text-red-400 mt-4 text-sm text-center sm:col-span-2'">
+                      ? 'text-green-600 dark:text-green-400 mt-4 text-sm text-center' 
+                      : 'text-red-600 dark:text-red-400 mt-4 text-sm text-center'">
             {{ mensaje.text }}
           </p>
         </form>
-
-        <DialogFooter>
-          <DialogClose as-child>
-            <button class="mt-4 w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-6 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600">
-              Cerrar
-            </button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import axios from 'axios'
 import { MapPin, Phone, Mail, Cpu } from 'lucide-vue-next'
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-  DialogClose,
-} from '@/components/ui/dialog'
+
+const mostrarModal = ref(false)
 
 const contactos = [
   { title: 'Oficina principal', icon: MapPin, info: 'Av. José de Lama N° 2302 - Urbanización Santa Rosa - Piura-Sullana' },
@@ -145,7 +127,6 @@ const contactos = [
   { title: 'Correo institucional', icon: Mail, info: `<a href="mailto:aamussem@ucvvirtual.edu.pe">aamussem@ucvvirtual.edu.pe</a> - <a href="mailto:aaronleandro.musemilla2017@gmail.com">aaronleandro.musemilla2017@gmail.com</a>` },
   { title: 'Área de desarrollo', icon: Cpu, info: 'Equipo especializado en recoleccion de datos, gestion de talleres y eficacia tecnologica.' },
 ]
-
 
 const mensaje = reactive({
   text: '',
@@ -168,19 +149,51 @@ const limpiarFormulario = () => {
 
 const enviarFormulario = async () => {
   try {
-    await axios.post('/contacto-biometrico', form)
-    mensaje.text = 'Tu mensaje fue enviado correctamente 👌 Nuestro equipo te contactará pronto.'
-    mensaje.tipo = 'success'
-    limpiarFormulario()
+    // Construir el mensaje para WhatsApp
+    const mensajeWhatsApp = `¡Hola! Me contacto desde el sistema de Gestión e Inscripciones INIF 48
+
+📋 *Información del contacto:*
+👤 *Nombre:* ${form.first_name}
+📧 *Email:* ${form.email}
+📱 *Teléfono:* ${form.phone}
+
+💬 *Mensaje:*
+${form.subject}
+
+¡Gracias por contactarnos! 😊`;
+
+    // PASO 1: Enviar datos al backend para guardar en BD
+    const response = await axios.post('/contacto-whatsapp', {
+      first_name: form.first_name,
+      email: form.email,
+      phone: form.phone,
+      subject: form.subject,
+      whatsapp_message: mensajeWhatsApp
+    });
+
+    if (response.data.success) {
+      // PASO 2: Si se guardó exitosamente, abrir WhatsApp
+      const mensajeCodificado = encodeURIComponent(mensajeWhatsApp);
+      const urlWhatsApp = `https://wa.me/51930992236?text=${mensajeCodificado}`;
+      window.open(urlWhatsApp, '_blank');
+      
+      // Mostrar mensaje de éxito
+      mensaje.text = '¡Perfecto! Tu mensaje fue guardado y se abrió WhatsApp. Solo presiona "Enviar" ahí.';
+      mensaje.tipo = 'success'
+      limpiarFormulario()
+    } else {
+      throw new Error(response.data.message || 'Error desconocido');
+    }
+    
   } catch (error) {
-    console.error(error)
-    mensaje.text = 'Error al enviar el mensaje. Por favor, intenta nuevamente.'
+    console.error('Error:', error)
+    mensaje.text = 'Error al guardar tu mensaje. Por favor, intenta nuevamente.'
     mensaje.tipo = 'error'
   }
 
   setTimeout(() => {
     mensaje.text = ''
     mensaje.tipo = ''
-  }, 4000)
+  }, 6000)
 }
 </script>
